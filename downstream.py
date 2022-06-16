@@ -154,8 +154,6 @@ class DRQAgent(object):
     def alpha(self):
         return self.log_alpha.exp()
 
-    def set_reuse(self):
-        self.critic.encoder.set_reuse()
 
     def update_optimizer(self, scale=0.01):
         self.critic_optimizer = torch.optim.AdamW([{'params':self.critic.encoder.parameters(),'lr':self.lr*scale},
