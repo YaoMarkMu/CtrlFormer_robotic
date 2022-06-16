@@ -1,0 +1,95 @@
+# env
+env: cartpole_swingup
+env_index: 0 
+token_index: 0 
+envs: [
+        ["walker_stand", "walker_walk"],
+        ["finger_turn_easy","finger_turn_hard"],
+        ["hopper_stand","hopper_hop"],
+        ["cartpole_swingup","cartpole_swingup_sparse"],
+        ["reacher_easy","reacher_hard"]
+      ]
+# IMPORTANT: if action_repeat is used the effective number of env steps needs to be
+# multiplied by action_repeat in the result graphs.
+# This is a common practice for a fair comparison.
+# See the 2nd paragraph in Appendix C of SLAC: https://arxiv.org/pdf/1907.00953.pdf
+# See Dreamer TF2's implementation: https://github.com/danijar/dreamer/blob/02f0210f5991c7710826ca7881f19c64a012290c/dreamer.py#L340
+action_repeat: 2
+# train
+num_train_steps: 100000
+num_train_iters: 1
+num_seed_steps: 1000
+replay_buffer_capacity: 100000
+seed: 1
+# eval
+eval_frequency: 5000
+num_eval_episodes: 10
+# misc
+log_frequency_step: 10000
+log_save_tb: true
+save_video: False
+device: cuda
+# observation
+image_size: 84
+image_pad: 4
+frame_stack: 3
+# global params
+lr: 1e-4
+# IMPORTANT: please use a batch size of 512 to reproduce the results in the paper. Hovewer, with a smaller batch size it still works well.
+batch_size: 512
+encoder_conf: 0.0025
+load_pretrain: True
+scale: 0.0425
+tag: trans_same
+
+
+# agent configuration
+agent:
+  name: drq
+  class: drq.DRQAgent
+  params:
+    obs_shape: ??? # to be specified later
+    action_shape: ??? # to be specified later
+    action_range: ??? # to be specified later
+    device: ${device}
+    encoder_cfg: ${encoder}
+    critic_cfg: ${critic}
+    actor_cfg: ${actor}
+    discount: 0.99
+    init_temperature: 0.1
+    lr: ${lr}
+    actor_update_frequency: 2
+    critic_tau: 0.01
+    critic_target_update_frequency: 2
+    batch_size: ${batch_size}
+
+critic:
+  class: drq.Critic
+  params:
+    encoder_cfg: ${token_index}
+    action_shape: ${agent.params.action_shape}
+    hidden_dim: 1024
+    hidden_depth: 3
+
+actor:
+  class: drq.Actor
+  params:
+    encoder_cfg: ${token_index}
+    action_shape: ${agent.params.action_shape}
+    hidden_depth: 3
+    hidden_dim: 1024
+    log_std_bounds: [-10, 2]
+
+encoder:
+  class: drq.Encoder
+  params:
+      obs_shape: ${agent.params.obs_shape}
+      feature_dim: 50
+
+
+# hydra configuration
+hydra:
+  name: ${env}
+  run:
+    dir: /apdcephfs/share_1290939/shoufachen/EXP_DR/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
+    #dir: ./runs/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
