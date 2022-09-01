@@ -3,7 +3,7 @@
 This is a PyTorch implementation of **CtrlFomer**.
 
 The whole framework is shown as follow:
-![CtrlFomer Framework](pngs/framework.png =100)
+![CtrlFomer Framework](pngs/framework.png =100x100)
 
 ## Requirements
 
