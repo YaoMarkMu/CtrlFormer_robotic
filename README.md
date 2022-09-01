@@ -1,4 +1,4 @@
-# CtrlFomer: Learning Transferable State Representation for Visual Control via Transformer (ICML2022)
+# CtrlFomer: Learning Transferable State Representation for Visual Control via Transformer
 
 This is a PyTorch implementation of **CtrlFomer**.
 
