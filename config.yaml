@@ -16,7 +16,7 @@ envs: [
 # See Dreamer TF2's implementation: https://github.com/danijar/dreamer/blob/02f0210f5991c7710826ca7881f19c64a012290c/dreamer.py#L340
 action_repeat: 2
 # train
-num_train_steps: 100000
+num_train_steps: 500000
 num_train_iters: 1
 num_seed_steps: 1000
 replay_buffer_capacity: 100000
@@ -39,14 +39,14 @@ lr: 1e-4
 batch_size: 512
 encoder_conf: 0.0025
 load_pretrain: True
-scale: 0.0425
+scale: 0.0825
 tag: trans_same
 
 
 # agent configuration
 agent:
-  name: drq
-  class: drq.DRQAgent
+  name: downstream
+  class: downstream.DRQAgent
   params:
     obs_shape: ??? # to be specified later
     action_shape: ??? # to be specified later
@@ -64,7 +64,7 @@ agent:
     batch_size: ${batch_size}
 
 critic:
-  class: drq.Critic
+  class: downstream.Critic
   params:
     encoder_cfg: ${token_index}
     action_shape: ${agent.params.action_shape}
@@ -72,7 +72,7 @@ critic:
     hidden_depth: 3
 
 actor:
-  class: drq.Actor
+  class: downstream.Actor
   params:
     encoder_cfg: ${token_index}
     action_shape: ${agent.params.action_shape}
@@ -81,7 +81,7 @@ actor:
     log_std_bounds: [-10, 2]
 
 encoder:
-  class: drq.Encoder
+  class: downstream.Encoder
   params:
       obs_shape: ${agent.params.obs_shape}
       feature_dim: 50
@@ -91,5 +91,5 @@ encoder:
 hydra:
   name: ${env}
   run:
-    dir: /apdcephfs/share_1290939/shoufachen/EXP_DR/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
-    #dir: ./runs/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
+    #dir: /apdcephfs/share_1290939/shoufachen/EXP_DR/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
+    dir: ./runs/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}

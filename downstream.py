@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import copy
 import math
-from vit import Timm_Encoder_toy as Timm_Encoder
+from CtrlFormer import Timm_Encoder_toy as Timm_Encoder
 import utils
 import hydra
 import kornia.augmentation as aug

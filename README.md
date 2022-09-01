@@ -3,7 +3,7 @@
 This is a PyTorch implementation of **CtrlFomer**.
 
 The whole framework is shown as follow:
-![CtrlFomer Framework](pngs/framework.png)
+![CtrlFomer Framework](pngs/framework.PNG)
 
 ## Requirements
 
@@ -34,7 +34,7 @@ conda activate CtrlFormer
 To train the CtrlFormer on the `Cartpole-Swingup` task run
 ```
 
-python train.py env=cartpole_swingup batch_size=512 action_repeat=8
+python3 train.py  batch_size=512 action_repeat=2 env_index=[0,1,2,3,4]
 
 ```
 
