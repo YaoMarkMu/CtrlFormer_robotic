@@ -142,7 +142,6 @@ class Workspace(object):
                 new_param.data.copy_(reuse_param.data)
                 
     def run(self,reuse,round,reuse_model): 
-        print(self.cfg.scale)
         if reuse:
             self.agent.log_alpha=torch.tensor(np.log(0.0001)).to("cuda")
             self.agent.log_alpha.requires_grad = True
