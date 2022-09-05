@@ -31,7 +31,7 @@ conda activate CtrlFormer
 
 
 
-To train the CtrlFormer on the `Cartpole-Swingup` task run
+To train the CtrlFormer run
 ```
 
 python3 train.py  batch_size=512 action_repeat=2 env_index=[0,1,2,3,4]
