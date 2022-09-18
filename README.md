@@ -102,3 +102,17 @@ R - average episode return computed over `num_eval_episodes` (usually 10)
 ## Acknowledgements
 We used [timm](https://github.com/rwightman/pytorch-image-models) for basic model of vision transformer.
 We used [kornia](https://github.com/kornia/kornia) for data augmentation.
+
+
+## Reference
+
+```
+@inproceedings{mu2022ctrlformer,
+  title={CtrlFormer: Learning Transferable State Representation for Visual Control via Transformer},
+  author={Mu, Yao Mark and Chen, Shoufa and Ding, Mingyu and Chen, Jianyu and Chen, Runjian and Luo, Ping},
+  booktitle={International Conference on Machine Learning},
+  pages={16043--16061},
+  year={2022},
+  organization={PMLR}
+}
+```
