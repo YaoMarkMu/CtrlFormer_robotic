@@ -98,6 +98,10 @@ R - average episode return computed over `num_eval_episodes` (usually 10)
 
 ```
 
+## Simplified Version for Single Task with Contrastive RL framework 
+We provide a simplified repo which is inherited from CtrlFomer (ICML2022) for single task reinforcement learning.
+Please check the following link:
+[ViT4RL](https://github.com/YaoMarkMu/ViT4RL)
 
 ## Acknowledgements
 We used [timm](https://github.com/rwightman/pytorch-image-models) for basic model of vision transformer.
