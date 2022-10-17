@@ -91,5 +91,4 @@ encoder:
 hydra:
   name: ${env}
   run:
-    #dir: /apdcephfs/share_1290939/shoufachen/EXP_DR/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
     dir: ./runs/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
